@@ -408,7 +408,7 @@ target="_new"> Used Data Sets</A>.</P></DIV>
 <DIV style="clear: both;"></DIV>
 <DIV class="conM ">
 <H2>Source codes: Download</H2>
-<P>Our project is implemented by C# and SQL Server. Souce codes of this project refer to <A onclick="stc(this, 26)" href="http://121.42.218.45/peipeili/ShortTextClassification-src.rar" 
+<P>Our project is implemented by C# and SQL Server. Souce codes of this project refer to <A onclick="stc(this, 26)" href="https://github.com/peipeilihfut/AssessSparseIE/blob/master/AssessSparseIEProject.rar" 
 target="_new"> Source codes</A>.</P>
 </DIV>
 <P>
