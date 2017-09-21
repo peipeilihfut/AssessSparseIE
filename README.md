@@ -410,6 +410,7 @@ target="_new"> Used Data Sets</A>.</P></DIV>
 <H2>Source codes: Download</H2>
 <P>More Details Refer to <A onclick="stc(this, 26)" href="http://121.42.218.45/peipeili/ShortTextClassification-src.rar" 
 target="_new"> Source codes</A>.</P>
+</DIV>
 <H2>Demo</H2>
 <P>
   ```Java  
@@ -570,8 +571,7 @@ target="_new"> Source codes</A>.</P>
             Console.ReadLine();
             return;
         }
-</P>
-</DIV>
+	</P>
 <DIV style="clear: both;"></DIV>
 <DIV class="conM ">
 <H2>References</H2>
