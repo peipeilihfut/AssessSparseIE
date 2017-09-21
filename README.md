@@ -435,7 +435,7 @@ target="_new"> Source codes</A>.</P>
             Console.WriteLine(args[7] + ": the number of seeds");
             Console.WriteLine(args[8] + ": bUseClustering, default: false");
             Console.WriteLine(args[9] + ": path directory");
-            /*******variables*****/
+            //variables
             string databaseServer = args[0];
             string databaseName = args[1];
             string conceptualizationSrcTable = args[2];
@@ -447,7 +447,7 @@ target="_new"> Source codes</A>.</P>
             int seedsNum = Convert.ToInt16(args[7]);
             bool bUseClustering = Convert.ToBoolean(args[8]);
             string pathStr = args[9];
-            /******************Read the vector of seeds from database***********************/
+            //Read the vector of seeds from database
             ContextMatchingMethod cmmObj = new ContextMatchingMethod();
             timeStart = DateTime.Now;
             List<Entity> entityList = new List<Entity>();
@@ -456,14 +456,14 @@ target="_new"> Source codes</A>.</P>
             // parameter of "int" is useless here
             Dictionary<string, Int64> conceptDict = new Dictionary<string, Int64>();
             // read from the database
-            cmmObj.ReadEntityListFromDatabase("msradb024", "AttributeSet", testEntityTable, ref entityList, ref entityExtendList, ref conceptDict, bExtendedEntity);//("msradb014", "PMTest", "PM_test_entities_1714", ref entityList, ref entityExtendList, ref conceptDict, bExtendedEntity);//(databaseServer, databaseName, testEntityTable, ref entityList, ref conceptDict);
+            cmmObj.ReadEntityListFromDatabase(databaseServer, databaseName, testEntityTable, ref entityList, ref entityExtendList, ref conceptDict, bExtendedEntity);
             if (entityList == null || entityList.Count() == 0)
             {
                 Console.WriteLine("Entities are null!");
                 Console.ReadLine();
                 return;
             }
-            Console.WriteLine("/*****preprocessing..*****/");
+            Console.WriteLine("preprocessing..");
             // pre-processing
             List<EntityPredictionCube> scoresOfProcessedEntity = new List<EntityPredictionCube>();
             Console.WriteLine("[Preprocess entities using rules...]");
@@ -473,20 +473,19 @@ target="_new"> Source codes</A>.</P>
             string preprocessFile = pathStr + "\\preprocessed.txt";
             cmmObj.OutputEntityPredictionCube(preprocessFile, false, scoresOfProcessedEntity, bExtendedEntity, 0);
             Console.WriteLine("/*****preprocessing-finish*****/");
-            Console.WriteLine("/*****collect seeds of all invoveled concepts from databases*****/");
+            Console.WriteLine("collect seeds of all invoveled concepts from databases");
             timeStart = DateTime.Now;
             Dictionary<string, List<string>> seedsOfConcepts = cmmObj.CollectSeedsOfConcepts("msradb014", "sentences", "C100_Stanford_V47_Pairs_lower", seedsNum, conceptDict);
-            //cmmObj.OutputOverlappedTokens(seedsOfConcepts, outputScoreFile.Replace(".txt", "-seeds.txt"));
+          
             Console.WriteLine("It took {0:N} seconds to collect patterns of seeds", (DateTime.Now - newTimeStart).TotalSeconds);
-            Console.WriteLine("/*******collect topK-frequency for seeds from sql database*******/");
-            //Dictionary<string, Dictionary<string, double>> trainVectorOfConcepts = new Dictionary<string, Dictionary<string, double>>();
+            Console.WriteLine("collect topK-frequency for seeds from sql database");
+            
             Dictionary<string, Dictionary<string, Int64>> conceptualizedConceptDict = new Dictionary<string, Dictionary<string, Int64>>();
             classNumThres = 500;
             Dictionary<string, List<Dictionary<string, double>>> trainVectorOfConcepts = cmmObj.CreateTrainingVectorByConceptualization(ref seedsOfConcepts, databaseServer, databaseName, conceptualizationSrcTable, classNumThres);
             Console.WriteLine("It took {0:N} seconds to create seeds' vector.", (DateTime.Now - timeStart).TotalSeconds);
-            /*********collect the vector for test entities from database**************/
+            //////////////collect the vector for test entities from database//////////////
             timeStart = DateTime.Now;
-            //maxTokenNum = 1000;
             classNumThres = 10000000;
             List<BagOfWordsOfEntity> bagOfWordsOfEntityList = cmmObj.CreateTestVectorByConceptualization(databaseServer, databaseName, conceptualizationSrcTable, entityList, classNumThres);
             // check output
@@ -507,7 +506,6 @@ target="_new"> Source codes</A>.</P>
             double probThres = 0.05;
             if (bUseClustering)
                 offlineClustersDict = clusterObj.GetStrLongDictByFile("HierarClusteringTop160kConcepts_10k_5_07_04_Step1_Allocate.txt", Int64.MaxValue);
-
             List<Dictionary<string, double>> seedsVector = null;
             Dictionary<string, double> testEntityVector = null;
             List<string> overlapTokenList = new List<string>();
@@ -520,7 +518,6 @@ target="_new"> Source codes</A>.</P>
             {
                 if (bagOfWordsOfEntityList[i].bagOfWordsDict == null)
                     continue;
-                // totalScore = 0;
                 maxScore = 0;//very important
                 validNum = 0;
                 if (trainVectorOfConcepts.TryGetValue(bagOfWordsOfEntityList[i].concept, out seedsVector))
