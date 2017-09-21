@@ -319,7 +319,7 @@ extractions for each relation which serve as seeds. Details of all test relation
 </TR>
 </TBODY></TABLE>
 
-<P align="left"><B>Table 3: Examples of isA relations </B></P>
+<P align="cneter"><B>Table 3: Examples of isA relations </B></P>
 <P>
 <TABLE align="center" class=" borderColumns borderRows tableBorder" cellSpacing="0" cellPadding="0">
   <TR>
@@ -399,74 +399,6 @@ extractions for each relation which serve as seeds. Details of all test relation
 </TR>
 </TABLE>
 </P>
-
-<P align="left"><B>Table 2: Overall Performance on 12 isA relationships</B></P>
-<P align="center">
-<TABLE align="center" class=" borderColumns borderRows tableBorder" cellSpacing="0" cellPadding="0">
-  <TR>
-    <TD align="center"><B>Method</B></TD>
-    <TD align="center"><B>BR</B></TD>
-    <TD align="center"><B>BP</B></TD>
-    <TD align="center"><B>GR</B></TD>
-    <TD align="center"><B>GP</B></TD>
-	<TD align="center"><B>BF1</B></TD>
-    <TD align="center"><B>GF1</B></TD></TR>
-  <TR>
-    <TD align="center">BM</TD>
-    <TD align="center">14.9</TD>
-    <TD align="center">30.3</TD>
-    <TD align="center">87.7</TD>
-    <TD align="center">74.1</TD>
-	<TD align="center">19.9(5)</TD>
-	<TD align="center">80.3(6)</TD>
-</TR>
-<TR>
-    <TD align="center">PM</TD>
-    <TD align="center">18.0</TD>
-    <TD align="center">36.5</TD>
-    <TD align="center">88.8</TD>
-    <TD align="center">75.2</TD>
-	<TD align="center">24.1(4)</TD>
-	<TD align="center">81.4(4)</TD>
-</TR>
-<TR>
-    <TD align="center">CM</TD>
-    <TD align="center">7.9</TD>
-    <TD align="center">24.2</TD>
-    <TD align="center">91.9</TD>
-    <TD align="center">75.2</TD>
-	<TD align="center">11.9(6)</TD>
-	<TD align="center">82.7(3)</TD>
-</TR>
-<TR>
-    <TD align="center">AM</TD>
-    <TD align="center">41.9</TD>
-    <TD align="center">50.3</TD>
-    <TD align="center">85.6</TD>
-    <TD align="center">81</TD>
-	<TD align="center">45.7(3)</TD>
-	<TD align="center">83.2(2)</TD>
-</TR>
-<TR>
-    <TD align="center">IM</TD>
-    <TD align="center">64.6</TD>
-    <TD align="center">49.1</TD>
-    <TD align="center">76.5</TD>
-    <TD align="center">86.1</TD>
-	<TD align="center">55.8(2)</TD>
-	<TD align="center">81.0(5)</TD>
-</TR>
-<TR>
-    <TD align="center">AIC</TD>
-    <TD align="center">56.7</TD>
-    <TD align="center">62.0</TD>
-    <TD align="center">88.5</TD>
-    <TD align="center">86.0</TD>
-	<TD align="center">59.2(1)</TD>
-	<TD align="center">87.2(1)</TD>
-</TR>
-</TABLE>
- </P>
 <P></P>
 <DIV style="clear: both;"></DIV>
 <DIV class="conM ">
