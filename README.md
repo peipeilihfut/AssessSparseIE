@@ -378,11 +378,6 @@ extractions for each relation which serve as seeds. Details of all test relation
     <TD align="center"><B>&lt;river, missouri river&gt;</B></TD>
 </TR>
   <TR>
-   <TD align="center"><B>Binary Relation</B></TD>
-    <TD align="center"><B>#bad pair</B></TD>
-    <TD align="center"><B>#good pair</B></TD>
-</TR>
-  <TR>
    <TD align="center"><B>isCapitalOf(country, city)</B></TD>
     <TD align="center"><B>&lt;dili, east timor&gt;</B></TD>
     <TD align="center"><B>&lt;andorra, andorra la Vella&gt;</B></TD>
@@ -424,39 +419,39 @@ Our AM (attribute-based context), CM (concept-based context) and IM (Isa-based c
 </TR>
   <TR>
     <TD align="center"><B>databaseServer</B></TD>
-    <TD align="left"><B>the name of database</B></TD>
+    <TD align="left"><B>the name of database;</B></TD>
 </TR>
    <TR>
     <TD align="center"><B>databaseName</B></TD>
-    <TD align="left"><B>the name of database</B></TD>
+    <TD align="left"><B>the name of database;</B></TD>
 </TR>
  <TR>
     <TD align="center"><B>testEntityTable</B></TD>
-    <TD align="left"><B>the table of conceptualization</B></TD>
+    <TD align="left"><B>the table of conceptualization;</B></TD>
 </TR>
   <TR>
    <TD align="center"><B>isSelectedTopK</B></TD>
-    <TD align="left"><B>Select Top tokens-1: yes, 0: no</B></TD>
+    <TD align="left"><B>whether select Top tokens or not, 1: yes, 0: no;</B></TD>
 </TR>
   <TR>
    <TD align="center"><B>classNumThres</B></TD>
-    <TD align="left"><B>the maximum number of concepts in conceptualization</B></TD>
+    <TD align="left"><B>the maximum number of concepts in conceptualization;</B></TD>
 </TR>
  <TR>
    <TD align="center"><B>distEvalType</B></TD>
-    <TD align="left"><B>the type of distance evaluation</B></TD>
+    <TD align="left"><B>the type of distance evaluation;</B></TD>
 </TR>
   <TR>
    <TD align="center"><B>seedsNum</B></TD>
-    <TD align="left"><B>the number of seeds</B></TD>
+    <TD align="left"><B>the number of seeds;</B></TD>
 </TR>
  <TR>
    <TD align="center"><B>bUseClustering</B></TD>
-    <TD align="left"><B>default: false</B></TD>
+    <TD align="left"><B>whether use clustering or not, default: false;</B></TD>
 </TR>
  <TR>
    <TD align="center"><B>pathStr</B></TD>
-    <TD align="left"><B>path directory</B></TD>
+    <TD align="left"><B>directory of files;</B></TD>
 </TR>
 </TBODY>
 </TABLE>
