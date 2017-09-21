@@ -420,43 +420,43 @@ Our AM (attribute-based context), CM (concept-based context) and IM (Isa-based c
   </TR>
   <TR>
     <TD align="center"><B>Variable</B></TD>
-    <TD align="center"><B>Description</B></TD>
+    <TD align="left"><B>Description</B></TD>
 </TR>
   <TR>
     <TD align="center"><B>databaseServer</B></TD>
-    <TD align="center"><B>the name of database</B></TD>
+    <TD align="left"><B>the name of database</B></TD>
 </TR>
    <TR>
     <TD align="center"><B>databaseName</B></TD>
-    <TD align="center"><B>the name of database</B></TD>
+    <TD align="left"><B>the name of database</B></TD>
 </TR>
  <TR>
     <TD align="center"><B>testEntityTable</B></TD>
-    <TD align="center"><B>the table of conceptualization</B></TD>
+    <TD align="left"><B>the table of conceptualization</B></TD>
 </TR>
   <TR>
    <TD align="center"><B>isSelectedTopK</B></TD>
-    <TD align="center"><B>Select Top tokens-1: yes, 0: no</B></TD>
+    <TD align="left"><B>Select Top tokens-1: yes, 0: no</B></TD>
 </TR>
   <TR>
    <TD align="center"><B>classNumThres</B></TD>
-    <TD align="center"><B>the maximum number of concepts in conceptualization</B></TD>
+    <TD align="left"><B>the maximum number of concepts in conceptualization</B></TD>
 </TR>
  <TR>
    <TD align="center"><B>distEvalType</B></TD>
-    <TD align="center"><B>the type of distance evaluation</B></TD>
+    <TD align="left"><B>the type of distance evaluation</B></TD>
 </TR>
   <TR>
    <TD align="center"><B>seedsNum</B></TD>
-    <TD align="center"><B>the number of seeds</B></TD>
+    <TD align="left"><B>the number of seeds</B></TD>
 </TR>
  <TR>
    <TD align="center"><B>bUseClustering</B></TD>
-    <TD align="center"><B>default: false</B></TD>
+    <TD align="left"><B>default: false</B></TD>
 </TR>
  <TR>
    <TD align="center"><B>pathStr</B></TD>
-    <TD align="center"><B>path directory</B></TD>
+    <TD align="left"><B>path directory</B></TD>
 </TR>
 </TBODY>
 </TABLE>
