@@ -403,7 +403,7 @@ extractions for each relation which serve as seeds. Details of all test relation
 <DIV style="clear: both;"></DIV>
 <DIV class="conM ">
 <H2>Used Data Sets: Download</H2>
-<P>More Details Refer to <A onclick="stc(this, 26)" href="http://121.42.218.45/peipeili/Used-Data-Sets-and-demo.rar" 
+<P>More Details Refer to <A onclick="stc(this, 26)" href="https://github.com/peipeilihfut/AssessSparseIE/blob/master/AllDataSets.pdf" 
 target="_new"> Used Data Sets</A>.</P></DIV>
 <DIV style="clear: both;"></DIV>
 <DIV class="conM ">
