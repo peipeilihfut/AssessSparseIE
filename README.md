@@ -411,9 +411,9 @@ target="_new"> Used Data Sets</A>.</P></DIV>
 <P>More Details Refer to <A onclick="stc(this, 26)" href="http://121.42.218.45/peipeili/ShortTextClassification-src.rar" 
 target="_new"> Source codes</A>.</P>
 </DIV>
-<H2>Demo</H2>
+<H2>For example: Parameter list for CM approach</H2>
 <P>
-  ```Java  
+  ```C#  
   
  public void SuperConceptBasedMain(string[] args)
         {
