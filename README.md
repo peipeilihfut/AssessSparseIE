@@ -416,6 +416,8 @@ Our AM (attribute-based context), CM (concept-based context) and IM (Isa-based c
  <P align="left"><B>             Parameter list for our CM approach</B></P>
 <TABLE align="center" class=" borderColumns borderRows tableBorder" cellSpacing="0" cellPadding="0">
 <TBODY>
+<TR><TD align="center" colspan="2"><B>Parameter list for our CM approach</B></TD>
+  </TR>
   <TR>
     <TD align="center"><B>Variable</B></TD>
     <TD align="center"><B>Description</B></TD>
