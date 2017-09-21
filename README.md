@@ -319,7 +319,7 @@ extractions for each relation which serve as seeds. Details of all test relation
 </TR>
 </TBODY></TABLE>
 
-<P align="cneter"><B>Table 3: Examples of isA relations </B></P>
+<P align="center"><B>Table 3: Examples of isA relations </B></P>
 <P>
 <TABLE align="center" class=" borderColumns borderRows tableBorder" cellSpacing="0" cellPadding="0">
   <TR>
@@ -413,7 +413,7 @@ target="_new"> Source codes</A>.</P>
 </DIV>
 <P>
 Our AM (attribute-based context), CM (concept-based context) and IM (Isa-based context) approaches have similar parametes, we explain the parameter list of CM as an example. Main functions of these three approaches are called AMMain(string[] args), SuperConceptBasedMain(string[] args) and IMBasedMain(string[] args) in the file of "CleaningMain.cs". 
- <P align="left"><B>Parameter list for our CM approach</B></P>
+ <P align="center"><B>Parameter list for our CM approach</B></P>
 <TABLE align="center" class=" borderColumns borderRows tableBorder" cellSpacing="0" cellPadding="0">
 <TBODY>
   <TR>
