@@ -413,6 +413,7 @@ target="_new"> Source codes</A>.</P>
 <H2>Demo</H2>
 <P>
   ```Java  
+  
  public void SuperConceptBasedMain(string[] args)
         {
             Console.WriteLine("/*******Find patterns from nGrams database...*******/");
