@@ -409,7 +409,171 @@ target="_new"> Used Data Sets</A>.</P></DIV>
 <DIV class="conM ">
 <H2>Source codes: Download</H2>
 <P>More Details Refer to <A onclick="stc(this, 26)" href="http://121.42.218.45/peipeili/ShortTextClassification-src.rar" 
-target="_new"> Source codes</A>.</P></DIV>
+target="_new"> Source codes</A>.</P>
+<H2>Demo</H2>
+<P>
+  ```Java  
+ public void SuperConceptBasedMain(string[] args)
+        {
+            Console.WriteLine("/*******Find patterns from nGrams database...*******/");
+            DateTime timeStart = DateTime.Now;
+            DateTime newTimeStart = DateTime.Now;
+            if (args.Count() < 9)
+            {
+                Console.WriteLine("too few parameters");
+                return;
+            }
+            Console.WriteLine("Read nGrams of Entities from the sql database:");
+            Console.WriteLine(args[0] + ": the database server");
+            Console.WriteLine(args[1] + ": the name of database");
+            Console.WriteLine(args[2] + ": the table of conceptualization");
+            Console.WriteLine(args[3] + ": testEntityTable");
+            Console.WriteLine(args[4] + ": Select Top tokens-1: yes, 0: no");
+            Console.WriteLine(args[5] + ": the maximum number of concepts in conceptualization");
+            Console.WriteLine(args[6] + ": the type of distance evaluation");
+            Console.WriteLine(args[7] + ": the number of seeds");
+            Console.WriteLine(args[8] + ": bUseClustering, default: false");
+            Console.WriteLine(args[9] + ": path directory");
+            /*******variables*****/
+            string databaseServer = args[0];
+            string databaseName = args[1];
+            string conceptualizationSrcTable = args[2];
+            string testEntityTable = args[3];
+            int isSelectedTopK = Convert.ToInt16(args[4]);
+            // how many concepts are selected
+            Int64 classNumThres = Convert.ToInt64(args[5]);
+            string distEvalType = args[6];
+            int seedsNum = Convert.ToInt16(args[7]);
+            bool bUseClustering = Convert.ToBoolean(args[8]);
+            string pathStr = args[9];
+            /******************Read the vector of seeds from database***********************/
+            ContextMatchingMethod cmmObj = new ContextMatchingMethod();
+            timeStart = DateTime.Now;
+            List<Entity> entityList = new List<Entity>();
+            List<EntityExtend> entityExtendList = new List<EntityExtend>();
+            int bExtendedEntity = 1;
+            // parameter of "int" is useless here
+            Dictionary<string, Int64> conceptDict = new Dictionary<string, Int64>();
+            // read from the database
+            cmmObj.ReadEntityListFromDatabase("msradb024", "AttributeSet", testEntityTable, ref entityList, ref entityExtendList, ref conceptDict, bExtendedEntity);//("msradb014", "PMTest", "PM_test_entities_1714", ref entityList, ref entityExtendList, ref conceptDict, bExtendedEntity);//(databaseServer, databaseName, testEntityTable, ref entityList, ref conceptDict);
+            if (entityList == null || entityList.Count() == 0)
+            {
+                Console.WriteLine("Entities are null!");
+                Console.ReadLine();
+                return;
+            }
+            Console.WriteLine("/*****preprocessing..*****/");
+            // pre-processing
+            List<EntityPredictionCube> scoresOfProcessedEntity = new List<EntityPredictionCube>();
+            Console.WriteLine("[Preprocess entities using rules...]");
+            PLToSLClass.InitTable();
+            cmmObj.FilterEntityWithStrangeSymbols(ref scoresOfProcessedEntity, ref entityList, ref entityExtendList, bExtendedEntity);
+            cmmObj.FilterEntityContainingConcept(ref scoresOfProcessedEntity, ref entityList, ref entityExtendList, bExtendedEntity);
+            string preprocessFile = pathStr + "\\preprocessed.txt";
+            cmmObj.OutputEntityPredictionCube(preprocessFile, false, scoresOfProcessedEntity, bExtendedEntity, 0);
+            Console.WriteLine("/*****preprocessing-finish*****/");
+            Console.WriteLine("/*****collect seeds of all invoveled concepts from databases*****/");
+            timeStart = DateTime.Now;
+            Dictionary<string, List<string>> seedsOfConcepts = cmmObj.CollectSeedsOfConcepts("msradb014", "sentences", "C100_Stanford_V47_Pairs_lower", seedsNum, conceptDict);
+            //cmmObj.OutputOverlappedTokens(seedsOfConcepts, outputScoreFile.Replace(".txt", "-seeds.txt"));
+            Console.WriteLine("It took {0:N} seconds to collect patterns of seeds", (DateTime.Now - newTimeStart).TotalSeconds);
+            Console.WriteLine("/*******collect topK-frequency for seeds from sql database*******/");
+            //Dictionary<string, Dictionary<string, double>> trainVectorOfConcepts = new Dictionary<string, Dictionary<string, double>>();
+            Dictionary<string, Dictionary<string, Int64>> conceptualizedConceptDict = new Dictionary<string, Dictionary<string, Int64>>();
+            classNumThres = 500;
+            Dictionary<string, List<Dictionary<string, double>>> trainVectorOfConcepts = cmmObj.CreateTrainingVectorByConceptualization(ref seedsOfConcepts, databaseServer, databaseName, conceptualizationSrcTable, classNumThres);
+            Console.WriteLine("It took {0:N} seconds to create seeds' vector.", (DateTime.Now - timeStart).TotalSeconds);
+            /*********collect the vector for test entities from database**************/
+            timeStart = DateTime.Now;
+            //maxTokenNum = 1000;
+            classNumThres = 10000000;
+            List<BagOfWordsOfEntity> bagOfWordsOfEntityList = cmmObj.CreateTestVectorByConceptualization(databaseServer, databaseName, conceptualizationSrcTable, entityList, classNumThres);
+            // check output
+            cmmObj.OutputNormalizedConceptualizedConcepts(trainVectorOfConcepts, seedsOfConcepts, pathStr + "\\CM-concept-seeds-concept.txt", false);
+            cmmObj.OutputBagOfWordsOfEntityList(ref bagOfWordsOfEntityList, pathStr + "\\CM-pair-conceptualized-concepts.txt", false);
+            LabelingPairsForSemanticSimilarity clusterObj = new LabelingPairsForSemanticSimilarity();
+            double totalFreqA = 0;
+            int totalInstanceA = 0;
+            double totalFreqB = 0;
+            int totalInstanceB = 0;
+            Dictionary<Int64, Dictionary<string, double>> clustersA = null;
+            Dictionary<Int64, Dictionary<string, double>> clustersB = null;
+            Dictionary<string, Int64> offlineClustersDict = null;
+            Dictionary<Int64, double> probOfConceptsOfTermA = null;
+            Dictionary<Int64, double> probOfConceptsOfTermB = null;
+            int minClusterSize = 5;
+            string clusterIdPair = "";
+            double probThres = 0.05;
+            if (bUseClustering)
+                offlineClustersDict = clusterObj.GetStrLongDictByFile("HierarClusteringTop160kConcepts_10k_5_07_04_Step1_Allocate.txt", Int64.MaxValue);
+
+            List<Dictionary<string, double>> seedsVector = null;
+            Dictionary<string, double> testEntityVector = null;
+            List<string> overlapTokenList = new List<string>();
+            List<ConceptEntityScore> scoreOfEntitiesList = new List<ConceptEntityScore>();
+            //double avgScore = 0;
+            //double totalScore = 0;
+            double maxScore = 0;
+            int validNum = 0;
+            for (int i = 0; i < bagOfWordsOfEntityList.Count(); i++)
+            {
+                if (bagOfWordsOfEntityList[i].bagOfWordsDict == null)
+                    continue;
+                // totalScore = 0;
+                maxScore = 0;//very important
+                validNum = 0;
+                if (trainVectorOfConcepts.TryGetValue(bagOfWordsOfEntityList[i].concept, out seedsVector))
+                {
+                    testEntityVector = bagOfWordsOfEntityList[i].bagOfWordsDict;
+                    if (bUseClustering)
+                    {
+                        clustersA = ConceptClustering.FindClusterEffeciently(testEntityVector, offlineClustersDict, ref totalFreqB, ref totalInstanceB);
+                        probOfConceptsOfTermA = clusterObj.DoStatisticsOfProbability(clustersA, totalFreqA, totalInstanceA, false);
+                    }
+                    double[] scoreArr = new double[seedsVector.Count];
+                    for (int j = 0; j < seedsVector.Count(); j++) // k+1 cases, k indicates the number of seeds
+                    {
+                        scoreArr[j] = 0;
+                        if (testEntityVector.Count() > 0)
+                        {
+                            // use the cluster-based similarity
+                            if (bUseClustering)
+                            {
+                                clustersB = ConceptClustering.FindClusterEffeciently(seedsVector[j], offlineClustersDict, ref totalFreqA, ref totalInstanceA);
+                                probOfConceptsOfTermB = clusterObj.DoStatisticsOfProbability(clustersB, totalFreqB, totalInstanceB, false);
+                                scoreArr[j] = ConceptClustering.EvaluateSimilarityOfTwoClusterDict(probOfConceptsOfTermA, probOfConceptsOfTermB, clustersA, clustersB, "max-max", minClusterSize, minClusterSize, ref clusterIdPair, probThres, false, 2, "tf");
+                            }
+                            else
+                                scoreArr[j] = ContextMatchingMethod.GetScore(seedsVector[j], testEntityVector, distEvalType);
+                            if (maxScore < scoreArr[j])
+                                maxScore = scoreArr[j];
+                            validNum++;
+                        }
+                        else
+                            scoreArr[j] = -1000;
+                    }
+                    ConceptEntityScore resultOfAnEntity = new ConceptEntityScore();
+                    resultOfAnEntity.concept = bagOfWordsOfEntityList[i].concept;
+                    resultOfAnEntity.entity = bagOfWordsOfEntityList[i].entity;
+                    resultOfAnEntity.score = maxScore;//avgScore;
+                    scoreOfEntitiesList.Add(resultOfAnEntity);
+                }
+            }
+            overlapTokenList.Clear();
+            Console.WriteLine("It took {0:N} seconds to create test data's vectors and evaluate.", (DateTime.Now - timeStart).TotalSeconds);
+            timeStart = DateTime.Now;
+            Console.WriteLine("It took {0:N} seconds to write vector of test entities into database.", (DateTime.Now - timeStart).TotalSeconds);
+            timeStart = DateTime.Now;
+            cmmObj.OutputResultsOfTestEntitesIntoFile(pathStr + "\\Result_TestEntities_" + seedsNum + "_concept_" + conceptDict.Count() + "_" + distEvalType + ".txt", false, scoreOfEntitiesList, entityList, "");
+            Console.WriteLine("It took {0:N} seconds to write scores into database.", (DateTime.Now - timeStart).TotalSeconds);
+            bagOfWordsOfEntityList.Clear();
+            trainVectorOfConcepts.Clear();
+            Console.WriteLine("It took {0:N} seconds to implement the New_CM based on the database", (DateTime.Now - newTimeStart).TotalSeconds);
+            Console.ReadLine();
+            return;
+        }
+</P>
+</DIV>
 <DIV style="clear: both;"></DIV>
 <DIV class="conM ">
 <H2>References</H2>
