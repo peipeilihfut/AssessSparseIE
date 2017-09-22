@@ -152,7 +152,7 @@ then train a binary-class classifier on a small number of labeled data varying w
 base classifiers to select the best one for predicting sparse extractions. Extensive studies 
 show that our approach can achieve better performance than state-of-the-art approaches in
 sparse extraction assessment.</P>
-<H2>Data Set </H2>
+<H2>Data Sets </H2>
 <P>Considering the experimental data sets, we randomly
 selected about 1800 entities that belong to 12 classes in
 Probase. Tables 2 and 3 show the descriptions and some
@@ -403,7 +403,7 @@ target="_new"> Used Data Sets</A>.</P></DIV>
 <DIV style="clear: both;"></DIV>
 <DIV class="conM ">
 <H2>Source codes: Download</H2>
-<P>Our project is implemented by C# and SQL Server. Souce codes of this project refer to <A onclick="stc(this, 26)" href="https://github.com/peipeilihfut/AssessSparseIE/blob/master/AssessSparseIEProject.rar" 
+<P>Our project is implemented by C# and SQL Server. Base classifiers used in our approach is from Weka-3.8.1.jar href="http://www.cs.waikato.ac.nz/ml/weka/downloading.html”. Souce codes of this project refer to <A onclick="stc(this, 26)" href="https://github.com/peipeilihfut/AssessSparseIE/blob/master/AssessSparseIEProject.rar" 
 target="_new"> Source codes</A>.</P>
 </DIV>
 <P>
