@@ -399,7 +399,8 @@ extractions for each relation which serve as seeds. Details of all test relation
 <DIV class="conM ">
 <H2>Used Data Sets: Download</H2>
 <P>More Details Refer to <A onclick="stc(this, 26)" href="https://github.com/peipeilihfut/AssessSparseIE/blob/master/AllDataSets.pdf" 
-target="_new"> Used Data Sets</A>.</P></DIV>
+target="_new"> Used Data Sets (1) </A>.</P>
+<P>More Details Refer to <A onclick="stc(this, 26)" href="https://github.com/peipeilihfut/AssessSparseIE/blob/master/New-labeled-data-sets.pdf" target="_new"> Used Data Sets (new) </A>.</P></DIV>
 <DIV style="clear: both;"></DIV>
 <DIV class="conM ">
 <H2>Source codes: Download</H2>
