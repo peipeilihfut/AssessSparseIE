@@ -463,8 +463,8 @@ Our AM (attribute-based context), CM (concept-based context) and IM (Isa-based c
 <P>[1] Knowledgebase Probase: http://research.microsoft.com/en-us/projects/probase/release.aspx</P>
 <P>[2] W. Wu, H. Li, H. Wang, and K. Q. Zhu. Probase: a probabilistic taxonomy 
 for text understanding. In Proceedings of SIGMOD'12, pages 481-492, 2012.</P><H2>Please cite the following references if you use this source code</H2>
-	<P>Peipei Li, Haixun Wang, Hongsong Li, and Xindong Wu, Employing Semantic Context for Sparse Information Extraction Assessment, ACM Transactions on Knowledge Discovery from Data,12(5): 54:1-36, July 2018.</P>
-	<P>Peipei Li, Haixun Wang, Hongsong Li, and Xindong Wu, Assessing Sparse Information Extraction using Semantic Contexts, In: Proceedings of 22nd ACM International Conference on Information and Knowledge Management (CIKM’13), pp.1709-1714, San Francisco, CA, USA, 2013.10.28-11.01</P>
+	<P>[1] Peipei Li, Haixun Wang, Hongsong Li, and Xindong Wu, Employing Semantic Context for Sparse Information Extraction Assessment, ACM Transactions on Knowledge Discovery from Data,12(5): 54:1-36, July 2018.</P>
+	<P>[2] Peipei Li, Haixun Wang, Hongsong Li, and Xindong Wu, Assessing Sparse Information Extraction using Semantic Contexts, In: Proceedings of 22nd ACM International Conference on Information and Knowledge Management (CIKM’13), pp.1709-1714, San Francisco, CA, USA, 2013.10.28-11.01</P>
 </DIV>
 <DIV class="conM ">
 <H2>Contact</H2>
